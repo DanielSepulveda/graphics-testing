@@ -12,8 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
-import Basic from "./components/Basic";
-import ReactThreeFiber from "./components/ReactThreeFiber";
+import Basic from "./pages/Basic";
+import ReactThreeFiber from "./pages/ReactThreeFiber";
 
 function App() {
   return (
