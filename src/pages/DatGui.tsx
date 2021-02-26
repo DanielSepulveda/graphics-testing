@@ -2,12 +2,9 @@ import * as React from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Stats from "three/examples/jsm/libs/stats.module";
-import DatGui, {
-  DatBoolean,
-  DatNumber,
-  DatButton,
-} from "@tim-soft/react-dat-gui";
+import DatGui, { DatBoolean, DatNumber, DatButton } from "react-dat-gui";
 import { chakra } from "@chakra-ui/react";
+import "react-dat-gui/dist/index.css";
 import { degreesToRadians, radiansToDegrees } from "../utils/helpers";
 import { Layout } from "../components";
 
