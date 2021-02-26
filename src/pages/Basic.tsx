@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { Layout } from "../components";
 // import Stats from "three/examples/jsm/libs/stats.module";
 
 const scene = new THREE.Scene();
@@ -76,7 +77,11 @@ function Basic() {
     renderLoop();
   }, []);
 
-  return <div ref={ref} />;
+  return (
+    <Layout>
+      <div ref={ref} />;
+    </Layout>
+  );
 }
 
 export default Basic;

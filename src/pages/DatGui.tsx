@@ -6,6 +6,11 @@ import DatGui, {
   DatNumber,
   DatButton,
 } from "@tim-soft/react-dat-gui";
+import { chakra } from "@chakra-ui/react";
+import { degreesToRadians, radiansToDegrees } from "../utils/helpers";
+import { Layout } from "../components";
+
+const ChakraDatGui = chakra(DatGui);
 
 // import Stats from "three/examples/jsm/libs/stats.module";
 
@@ -65,14 +70,6 @@ const handleResize = () => {
   camera.updateProjectionMatrix();
 };
 
-const radiansToDegrees = (radians: number) => {
-  return (radians * 180) / Math.PI;
-};
-
-const degreesToRadians = (degrees: number) => {
-  return (degrees * Math.PI) / 180;
-};
-
 const initialGuiData = {
   xPosition: mesh.position.x,
   yRotation: radiansToDegrees(mesh.rotation.y),
@@ -82,6 +79,10 @@ const initialGuiData = {
 function DatGuiDemo() {
   const ref = React.useRef<HTMLDivElement>(null);
   const [guiData, setGuiData] = React.useState(initialGuiData);
+
+  /**
+   * Initial Listeners
+   */
 
   React.useEffect(() => {
     ref.current?.appendChild(renderer.domElement);
@@ -96,6 +97,10 @@ function DatGuiDemo() {
   React.useEffect(() => {
     renderLoop();
   }, []);
+
+  /**
+   * GUI Handlers
+   */
 
   React.useEffect(() => {
     material.wireframe = guiData.wireframe;
@@ -121,15 +126,15 @@ function DatGuiDemo() {
   }, []);
 
   return (
-    <div>
-      <DatGui data={guiData} onUpdate={handleGuiUpdate}>
+    <Layout>
+      <ChakraDatGui data={guiData} onUpdate={handleGuiUpdate} top="5rem">
         <DatNumber path="xPosition" label="X" min={-5} max={5} step={0.5} />
         <DatNumber path="yRotation" label="Y" min={-180} max={180} step={5} />
         <DatBoolean path="wireframe" label="Wireframe" />
         <DatButton label="Home" onClick={handleHomeOnClick} />
-      </DatGui>
+      </ChakraDatGui>
       <div ref={ref} />
-    </div>
+    </Layout>
   );
 }
 

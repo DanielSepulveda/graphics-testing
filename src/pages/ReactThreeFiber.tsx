@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Canvas, MeshProps, useFrame } from "react-three-fiber";
 import type { Mesh } from "three";
+import { Box } from "@chakra-ui/react";
+import { Layout } from "../components";
 
 const Sphere: React.FC<MeshProps> = (props) => {
   const mesh = useRef<Mesh>();
@@ -54,12 +56,16 @@ const Cylinder: React.FC<MeshProps> = (props) => {
 
 const Demo = () => {
   return (
-    <Canvas>
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      <Sphere position={[-2.2, 0, 0]} />
-      <Cylinder position={[2.2, 0, 0]} />
-    </Canvas>
+    <Layout>
+      <Box h="calc(100vh - 4.5rem)">
+        <Canvas>
+          <ambientLight />
+          <pointLight position={[10, 10, 10]} />
+          <Sphere position={[-2.2, 0, 0]} />
+          <Cylinder position={[2.2, 0, 0]} />
+        </Canvas>
+      </Box>
+    </Layout>
   );
 };
 
