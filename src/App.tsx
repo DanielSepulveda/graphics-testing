@@ -14,12 +14,13 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 
 import Basic from "./pages/Basic";
 import ReactThreeFiber from "./pages/ReactThreeFiber";
+import DatGui from "./pages/DatGui";
 
 function App() {
   return (
     <Box height="100vh" maxWidth="100vw">
       <Router>
-        <chakra.header
+        {/* <chakra.header
           pos="fixed"
           top="0"
           bg="white"
@@ -48,8 +49,11 @@ function App() {
               </Menu>
             </Flex>
           </chakra.div>
-        </chakra.header>
+        </chakra.header> */}
         <Switch>
+          <Route path="/datGui">
+            <DatGui />
+          </Route>
           <Route path="/rtf">
             <ReactThreeFiber />
           </Route>
