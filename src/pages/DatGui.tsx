@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import Stats from "three/examples/jsm/libs/stats.module";
 import DatGui, {
   DatBoolean,
   DatNumber,
@@ -11,8 +12,6 @@ import { degreesToRadians, radiansToDegrees } from "../utils/helpers";
 import { Layout } from "../components";
 
 const ChakraDatGui = chakra(DatGui);
-
-// import Stats from "three/examples/jsm/libs/stats.module";
 
 const scene = new THREE.Scene();
 
@@ -46,21 +45,21 @@ const mesh = new THREE.Mesh(sphere, material);
 
 scene.add(mesh);
 
-// const stats = Stats();
-// stats.showPanel(0);
-// document.body.appendChild(stats.dom);
+const stats = Stats();
+stats.showPanel(0);
+stats.domElement.style.cssText =
+  "position:fixed;top:5rem;left:16px;cursor:pointer;opacity:0.9;z-index:10000";
 
 const renderLoop = () => {
-  // stats.begin();
+  stats.begin();
   renderer.render(scene, camera);
   updateScene();
-  // stats.end();
-  // stats.update();
+  stats.end();
+  stats.update();
   requestAnimationFrame(renderLoop);
 };
 
 const updateScene = () => {
-  // mesh.rotation.y = mesh.rotation.y + (1 * Math.PI) / 180;
   cameraControls.update();
 };
 
@@ -74,10 +73,16 @@ const initialGuiData = {
   xPosition: mesh.position.x,
   yRotation: radiansToDegrees(mesh.rotation.y),
   wireframe: (mesh.material as THREE.MeshBasicMaterial).wireframe,
+  showStats: false,
 };
 
+type GuiData = typeof initialGuiData;
+
 function DatGuiDemo() {
-  const ref = React.useRef<HTMLDivElement>(null);
+  const refCanvas = React.useRef<HTMLDivElement>(null);
+  const refStats = React.useRef<HTMLDivElement>(null);
+  const prevShowStats = React.useRef(initialGuiData.showStats);
+
   const [guiData, setGuiData] = React.useState(initialGuiData);
 
   /**
@@ -85,8 +90,14 @@ function DatGuiDemo() {
    */
 
   React.useEffect(() => {
-    ref.current?.appendChild(renderer.domElement);
+    const canvasNode = refCanvas.current;
+
+    canvasNode?.appendChild(renderer.domElement);
     renderer.render(scene, camera);
+
+    return () => {
+      canvasNode?.removeChild(renderer.domElement);
+    };
   }, []);
 
   React.useEffect(() => {
@@ -114,14 +125,28 @@ function DatGuiDemo() {
     mesh.rotation.y = degreesToRadians(guiData.yRotation);
   }, [guiData.yRotation]);
 
-  const handleGuiUpdate = React.useCallback((newData) => {
+  React.useEffect(() => {
+    const prevValue = prevShowStats.current;
+    const statsNode = refStats.current;
+    // Check that value was toggled
+    if (guiData.showStats !== prevValue) {
+      if (guiData.showStats) {
+        statsNode?.appendChild(stats.dom);
+      } else {
+        statsNode?.removeChild(stats.dom);
+      }
+      prevShowStats.current = guiData.showStats;
+    }
+  }, [guiData.showStats]);
+
+  const handleGuiUpdate = React.useCallback((newData: GuiData) => {
     setGuiData((prevData) => ({
       ...prevData,
       ...newData,
     }));
   }, []);
 
-  const handleHomeOnClick = React.useCallback(() => {
+  const handleReset = React.useCallback(() => {
     setGuiData(initialGuiData);
   }, []);
 
@@ -131,9 +156,11 @@ function DatGuiDemo() {
         <DatNumber path="xPosition" label="X" min={-5} max={5} step={0.5} />
         <DatNumber path="yRotation" label="Y" min={-180} max={180} step={5} />
         <DatBoolean path="wireframe" label="Wireframe" />
-        <DatButton label="Home" onClick={handleHomeOnClick} />
+        <DatBoolean path="showStats" label="Stats" />
+        <DatButton label="Reset" onClick={handleReset} />
       </ChakraDatGui>
-      <div ref={ref} />
+      <div id="threejs-stats" ref={refStats} />
+      <div id="threejs-canvas" ref={refCanvas} />
     </Layout>
   );
 }
