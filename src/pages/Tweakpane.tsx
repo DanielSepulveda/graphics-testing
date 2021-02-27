@@ -177,7 +177,7 @@ function DatGuiDemo() {
         title: "Reset",
       })
       .on("click", () => {
-        pane.importPreset(initialGuiData);
+        pane.importPreset(_clone(initialGuiData));
       });
 
     return () => {
