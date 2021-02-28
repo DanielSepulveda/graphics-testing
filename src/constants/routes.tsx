@@ -4,6 +4,7 @@ import Basic from "../pages/Basic";
 import Rtf from "../pages/ReactThreeFiber";
 import DatGui from "../pages/DatGui";
 import Tweakpane from "../pages/Tweakpane";
+import RtfGui from "../pages/ReactThreeGui";
 
 export type Page = {
   route: string;
@@ -19,5 +20,10 @@ export const pages: Page[] = [
     route: "/tweakpane",
     label: "Tweakpane Demo",
     pageComponent: <Tweakpane />,
+  },
+  {
+    route: "/rtfGui",
+    label: "RTF Gui Demo",
+    pageComponent: <RtfGui />,
   },
 ];

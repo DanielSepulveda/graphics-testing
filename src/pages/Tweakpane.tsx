@@ -34,7 +34,7 @@ camera.position.set(initCameraPos.x, initCameraPos.y, initCameraPos.z);
 const cameraControls = new OrbitControls(camera, renderer.domElement);
 
 // const box = new THREE.BoxGeometry();
-const sphere = new THREE.SphereGeometry(1);
+const sphere = new THREE.SphereBufferGeometry(1);
 const material = new THREE.MeshBasicMaterial({
   color: "white",
   wireframe: true,
