@@ -6,7 +6,7 @@ import { Sphere, OrbitControls, Stats as DStats } from "@react-three/drei";
 import { withControls, useControl, Controls } from "react-three-gui";
 import { degreesToRadians } from "../utils/helpers";
 
-import { Layout } from "../components";
+import { CanvasLayout } from "../components";
 
 const Canvas = withControls(RtfCanvas) as typeof RtfCanvas;
 const Stats = chakra(DStats);
@@ -49,7 +49,7 @@ const MySphere = () => {
 
 const Demo = () => {
   return (
-    <Layout>
+    <CanvasLayout>
       <Box h="calc(100vh - 4.5rem)">
         <Controls.Provider>
           <Canvas
@@ -67,7 +67,7 @@ const Demo = () => {
           <Controls anchor="bottom_right" />
         </Controls.Provider>
       </Box>
-    </Layout>
+    </CanvasLayout>
   );
 };
 

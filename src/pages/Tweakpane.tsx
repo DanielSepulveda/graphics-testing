@@ -5,7 +5,7 @@ import Stats from "three/examples/jsm/libs/stats.module";
 import tweakpane from "tweakpane";
 import { cloneDeep as _clone } from "lodash";
 import { radiansToDegrees } from "../utils/helpers";
-import { Layout } from "../components";
+import { CanvasLayout } from "../components";
 
 const scene = new THREE.Scene();
 
@@ -189,10 +189,10 @@ function DatGuiDemo() {
   }, []);
 
   return (
-    <Layout>
+    <CanvasLayout>
       <div id="threejs-stats" ref={refStats} />
       <div id="threejs-canvas" ref={refCanvas} />
-    </Layout>
+    </CanvasLayout>
   );
 }
 
