@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { Layout } from "../components";
+import { CanvasLayout } from "../components";
 // import Stats from "three/examples/jsm/libs/stats.module";
 
 const scene = new THREE.Scene();
@@ -78,9 +78,9 @@ function Basic() {
   }, []);
 
   return (
-    <Layout>
+    <CanvasLayout>
       <div ref={ref} />;
-    </Layout>
+    </CanvasLayout>
   );
 }
 

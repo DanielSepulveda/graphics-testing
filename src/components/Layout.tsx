@@ -7,8 +7,15 @@ const Layout: React.FC = ({ children }) => {
   return (
     <>
       <Header />
-      <Box as="main" width="100%">
-        <Box mt="4.5rem" minH="90vh" position="relative">
+      <Box
+        w="full"
+        pb="12"
+        pt="3"
+        maxW={{ base: "xl", md: "7xl" }}
+        mx="auto"
+        px={{ base: "6", md: "8" }}
+      >
+        <Box mt="4.5rem" minH="76vh">
           {children}
         </Box>
       </Box>

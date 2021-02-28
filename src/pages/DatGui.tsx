@@ -6,7 +6,7 @@ import DatGui, { DatBoolean, DatNumber, DatButton } from "react-dat-gui";
 import { chakra } from "@chakra-ui/react";
 import "react-dat-gui/dist/index.css";
 import { degreesToRadians, radiansToDegrees } from "../utils/helpers";
-import { Layout } from "../components";
+import { CanvasLayout } from "../components";
 
 const ChakraDatGui = chakra(DatGui);
 
@@ -148,7 +148,7 @@ function DatGuiDemo() {
   }, []);
 
   return (
-    <Layout>
+    <CanvasLayout>
       <ChakraDatGui data={guiData} onUpdate={handleGuiUpdate} top="5rem">
         <DatNumber path="xPosition" label="X" min={-5} max={5} step={0.5} />
         <DatNumber path="yRotation" label="Y" min={-180} max={180} step={5} />
@@ -158,7 +158,7 @@ function DatGuiDemo() {
       </ChakraDatGui>
       <div id="threejs-stats" ref={refStats} />
       <div id="threejs-canvas" ref={refCanvas} />
-    </Layout>
+    </CanvasLayout>
   );
 }
 
