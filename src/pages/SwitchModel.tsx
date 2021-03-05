@@ -171,6 +171,10 @@ const MultiModel = (props: MulitModalProps) => {
           showStats: initialGuiData.showStats,
         });
       });
+
+    return () => {
+      pane.dispose();
+    };
   }, []);
 
   const geometry = React.useMemo(() => {

@@ -53,9 +53,9 @@ export const pages: Page[] = [
   },
   {
     route: "/switchmodels",
-    menuLabel: "Switch models",
+    menuLabel: "HW #2 - Switch models",
     component: <SwitchModels />,
-    pageImage: "https://i.imgur.com/iJ2J57M.png",
-    cardTitle: "Switch models",
+    pageImage: "https://i.imgur.com/EjLgkeH.png",
+    cardTitle: "HW #2 - Switch models",
   },
 ];
