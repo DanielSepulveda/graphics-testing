@@ -5,6 +5,7 @@ import Rtf from "../pages/ReactThreeFiber";
 import DatGui from "../pages/DatGui";
 import Tweakpane from "../pages/Tweakpane";
 import RtfGui from "../pages/ReactThreeGui";
+import SwitchModels from "../pages/SwitchModel";
 
 export type Page = {
   route: string;
@@ -49,5 +50,12 @@ export const pages: Page[] = [
     component: <RtfGui />,
     pageImage: "https://i.imgur.com/iJ2J57M.png",
     cardTitle: "R3F gui demo",
+  },
+  {
+    route: "/switchmodels",
+    menuLabel: "Switch models",
+    component: <SwitchModels />,
+    pageImage: "https://i.imgur.com/iJ2J57M.png",
+    cardTitle: "Switch models",
   },
 ];
