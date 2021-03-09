@@ -6,8 +6,9 @@ import {
   Box,
   Wrap,
   WrapItem,
-  useRadio,
-  useRadioGroup,
+  CheckboxGroup,
+  useCheckboxGroupContext,
+  useCheckbox,
   chakra,
 } from "@chakra-ui/react";
 import {
@@ -21,6 +22,7 @@ import {
   SphereBufferGeometry,
   BoxBufferGeometry,
   ConeBufferGeometry,
+  MeshBasicMaterial,
 } from "three";
 import tweakpane from "tweakpane";
 import { cloneDeep as _clone } from "lodash";
@@ -32,7 +34,7 @@ const Stats = chakra(DStats);
 type PossibleModels = "sphere" | "box" | "cone";
 
 type MulitModalProps = {
-  currentModel: PossibleModels;
+  currentModels: PossibleModels[];
 };
 
 const initialGuiData = {
@@ -48,7 +50,10 @@ const initialGuiData = {
 };
 
 const MultiModel = (props: MulitModalProps) => {
-  const mesh = React.useRef<Mesh>();
+  const sphereMesh = React.useRef<Mesh>();
+  const boxMesh = React.useRef<Mesh>();
+  const coneMesh = React.useRef<Mesh>();
+
   const [state, setState] = React.useState({
     showStats: initialGuiData.showStats,
     wireframe: initialGuiData.wireframe,
@@ -94,8 +99,14 @@ const MultiModel = (props: MulitModalProps) => {
         label: "x",
       })
       .on("change", (value) => {
-        if (mesh.current) {
-          mesh.current.position.x = value;
+        if (sphereMesh.current) {
+          sphereMesh.current.position.x = value - 3;
+        }
+        if (boxMesh.current) {
+          boxMesh.current.position.x = value;
+        }
+        if (coneMesh.current) {
+          coneMesh.current.position.x = value + 3;
         }
       });
     positionFolder
@@ -105,8 +116,14 @@ const MultiModel = (props: MulitModalProps) => {
         label: "y",
       })
       .on("change", (value) => {
-        if (mesh.current) {
-          mesh.current.position.y = value;
+        if (sphereMesh.current) {
+          sphereMesh.current.position.y = value;
+        }
+        if (boxMesh.current) {
+          boxMesh.current.position.y = value;
+        }
+        if (coneMesh.current) {
+          coneMesh.current.position.y = value;
         }
       });
     positionFolder
@@ -116,8 +133,14 @@ const MultiModel = (props: MulitModalProps) => {
         label: "z",
       })
       .on("change", (value) => {
-        if (mesh.current) {
-          mesh.current.position.z = value;
+        if (sphereMesh.current) {
+          sphereMesh.current.position.z = value;
+        }
+        if (boxMesh.current) {
+          boxMesh.current.position.z = value;
+        }
+        if (coneMesh.current) {
+          coneMesh.current.position.z = value;
         }
       });
 
@@ -131,8 +154,14 @@ const MultiModel = (props: MulitModalProps) => {
         label: "x",
       })
       .on("change", (value) => {
-        if (mesh.current) {
-          mesh.current.rotation.x = degreesToRadians(value);
+        if (sphereMesh.current) {
+          sphereMesh.current.rotation.x = degreesToRadians(value);
+        }
+        if (boxMesh.current) {
+          boxMesh.current.rotation.x = degreesToRadians(value);
+        }
+        if (coneMesh.current) {
+          coneMesh.current.rotation.x = degreesToRadians(value);
         }
       });
     rotationFolder
@@ -142,8 +171,14 @@ const MultiModel = (props: MulitModalProps) => {
         label: "y",
       })
       .on("change", (value) => {
-        if (mesh.current) {
-          mesh.current.rotation.y = degreesToRadians(value);
+        if (sphereMesh.current) {
+          sphereMesh.current.rotation.y = degreesToRadians(value);
+        }
+        if (boxMesh.current) {
+          boxMesh.current.rotation.y = degreesToRadians(value);
+        }
+        if (coneMesh.current) {
+          coneMesh.current.rotation.y = degreesToRadians(value);
         }
       });
     rotationFolder
@@ -153,8 +188,14 @@ const MultiModel = (props: MulitModalProps) => {
         label: "z",
       })
       .on("change", (value) => {
-        if (mesh.current) {
-          mesh.current.rotation.z = degreesToRadians(value);
+        if (sphereMesh.current) {
+          sphereMesh.current.rotation.z = degreesToRadians(value);
+        }
+        if (boxMesh.current) {
+          boxMesh.current.rotation.z = degreesToRadians(value);
+        }
+        if (coneMesh.current) {
+          coneMesh.current.rotation.z = degreesToRadians(value);
         }
       });
 
@@ -177,16 +218,9 @@ const MultiModel = (props: MulitModalProps) => {
     };
   }, []);
 
-  const geometry = React.useMemo(() => {
-    if (props.currentModel === "sphere") return sphere;
-    if (props.currentModel === "box") return box;
-    if (props.currentModel === "cone") return cone;
-  }, [box, cone, props.currentModel, sphere]);
-
   const newColor = scaleRGB(state.color, "down");
   const color = new THREE.Color(newColor.r, newColor.g, newColor.b);
-
-  console.log(color);
+  const material = new MeshBasicMaterial({ color, wireframe: state.wireframe });
 
   return (
     <>
@@ -197,9 +231,25 @@ const MultiModel = (props: MulitModalProps) => {
         }}
       >
         <OrbitControls />
-        <mesh ref={mesh} geometry={geometry}>
-          <meshBasicMaterial color={color} wireframe={state.wireframe} />
-        </mesh>
+        {props.currentModels.includes("sphere") && (
+          <mesh
+            ref={sphereMesh}
+            geometry={sphere}
+            position={[-3, 0, 0]}
+            material={material}
+          ></mesh>
+        )}
+        {props.currentModels.includes("box") && (
+          <mesh ref={boxMesh} geometry={box} material={material}></mesh>
+        )}
+        {props.currentModels.includes("cone") && (
+          <mesh
+            ref={coneMesh}
+            geometry={cone}
+            position={[3, 0, 0]}
+            material={material}
+          ></mesh>
+        )}
       </Canvas>
       {state.showStats && (
         <Stats top="5rem !important" left="16px !important" />
@@ -209,10 +259,21 @@ const MultiModel = (props: MulitModalProps) => {
 };
 
 type ModelCardProps = {
+  model: string;
   children: (state: { isChecked: boolean }) => React.ReactNode;
 };
-const ModelCard: React.FC<ModelCardProps> = ({ children, ...radioProps }) => {
-  const { getInputProps, getCheckboxProps, state } = useRadio(radioProps);
+const ModelCard: React.FC<ModelCardProps> = ({ children, model }) => {
+  const group = useCheckboxGroupContext();
+
+  const isChecked = group.value.includes(model);
+  const onChange = group.onChange;
+
+  const { state, getInputProps, getCheckboxProps } = useCheckbox({
+    name: model,
+    value: model,
+    isChecked,
+    onChange,
+  });
 
   const input = getInputProps();
   const checkbox = getCheckboxProps();
@@ -267,44 +328,45 @@ const Model: React.FC<ModelProps> = ({ component: Component, isChecked }) => {
 };
 
 const Demo = () => {
-  const { getRootProps, getRadioProps, value } = useRadioGroup({
-    name: "model",
-    defaultValue: "sphere",
-  });
+  const [value, setValue] = React.useState<PossibleModels[]>(["box"]);
 
-  const group = getRootProps();
+  const handleChange = (newValue: PossibleModels[]) => {
+    setValue(newValue);
+  };
 
   return (
     <CanvasLayout>
       <Box backgroundColor="#333359">
         <Box h="calc(100vh - 4.5rem)" position="relative">
-          <MultiModel currentModel={value as PossibleModels} />
+          <MultiModel currentModels={value} />
         </Box>
         <Box position="absolute" bottom="0" left="0" right="0">
           <Box paddingBottom="6" display="flex" justifyContent="center">
-            <Wrap spacing="4" {...group}>
-              <WrapItem>
-                <ModelCard {...getRadioProps({ value: "sphere" })}>
-                  {({ isChecked }) => (
-                    <Model component={Sphere} isChecked={isChecked} />
-                  )}
-                </ModelCard>
-              </WrapItem>
-              <WrapItem>
-                <ModelCard {...getRadioProps({ value: "box" })}>
-                  {({ isChecked }) => (
-                    <Model component={ThreeBox} isChecked={isChecked} />
-                  )}
-                </ModelCard>
-              </WrapItem>
-              <WrapItem>
-                <ModelCard {...getRadioProps({ value: "cone" })}>
-                  {({ isChecked }) => (
-                    <Model component={Cone} isChecked={isChecked} />
-                  )}
-                </ModelCard>
-              </WrapItem>
-            </Wrap>
+            <CheckboxGroup value={value} onChange={handleChange}>
+              <Wrap spacing="4">
+                <WrapItem>
+                  <ModelCard model="sphere">
+                    {({ isChecked }) => (
+                      <Model component={Sphere} isChecked={isChecked} />
+                    )}
+                  </ModelCard>
+                </WrapItem>
+                <WrapItem>
+                  <ModelCard model="box">
+                    {({ isChecked }) => (
+                      <Model component={ThreeBox} isChecked={isChecked} />
+                    )}
+                  </ModelCard>
+                </WrapItem>
+                <WrapItem>
+                  <ModelCard model="cone">
+                    {({ isChecked }) => (
+                      <Model component={Cone} isChecked={isChecked} />
+                    )}
+                  </ModelCard>
+                </WrapItem>
+              </Wrap>
+            </CheckboxGroup>
           </Box>
         </Box>
       </Box>
