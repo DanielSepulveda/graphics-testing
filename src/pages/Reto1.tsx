@@ -28,6 +28,13 @@ const removeAllModels = () => {
   sceneModelsIds = [];
 };
 
+  let normal = new THREE.Vector3(0, 1, 0);
+  let distanceToPlane = 0.;
+  let plane = new THREE.Plane(normal, distanceToPlane);
+  let size = 10;
+  let color = 808080;
+  let planeHelper = new THREE.PlaneHelper(plane, size, color);
+
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -173,6 +180,7 @@ type GuiData = {
   model: PrimitiveModelType;
   globalWireframe: boolean;
   globalShowStats: boolean;
+  globalPlane: boolean
   globalColor: RGB;
   selectedPosX: number;
   selectedPosY: number;
@@ -186,6 +194,7 @@ type GuiData = {
 
 const initialGuiData: GuiData = {
   model: "cubo",
+  globalPlane: false,
   globalWireframe: true,
   globalShowStats: false,
   globalColor: scaleRGB({ r: 0.2, g: 0.2, b: 0.35 }),
@@ -320,6 +329,17 @@ function Reto1() {
           )
         );
       });
+
+      globalFolder
+      .addInput(PARAMS, "globalPlane", { label: "Plane" })
+      .on("change", (value) => {
+        if (value) {
+          scene.add(planeHelper);
+        } else {
+          scene.remove(planeHelper);
+        }
+      });
+
 
     const statsNode = refStats.current;
     globalFolder
