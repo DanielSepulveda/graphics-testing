@@ -63,7 +63,7 @@ export const pages: Page[] = [
     route: "/reto1",
     menuLabel: "Reto 1 - Paint",
     component: <Reto1 />,
-    pageImage: "https://i.imgur.com/dnWkB5m.png",
+    pageImage: "https://i.imgur.com/GtD68cD.png",
     cardTitle: "Reto 1 - Paint",
   },
 ];
