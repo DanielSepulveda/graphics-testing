@@ -6,6 +6,7 @@ import DatGui from "../pages/DatGui";
 import Tweakpane from "../pages/Tweakpane";
 import RtfGui from "../pages/ReactThreeGui";
 import SwitchModels from "../pages/SwitchModel";
+import Reto1 from "../pages/Reto1";
 
 export type Page = {
   route: string;
@@ -57,5 +58,12 @@ export const pages: Page[] = [
     component: <SwitchModels />,
     pageImage: "https://i.imgur.com/dnWkB5m.png",
     cardTitle: "HW #2 - Switch models",
+  },
+  {
+    route: "/reto1",
+    menuLabel: "Reto 1 - Paint",
+    component: <Reto1 />,
+    pageImage: "https://i.imgur.com/GtD68cD.png",
+    cardTitle: "Reto 1 - Paint",
   },
 ];
