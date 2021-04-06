@@ -7,6 +7,7 @@ import Tweakpane from "../pages/Tweakpane";
 import RtfGui from "../pages/ReactThreeGui";
 import SwitchModels from "../pages/SwitchModel";
 import Reto1 from "../pages/Reto1";
+import Camera from "../pages/Camera";
 
 export type Page = {
   route: string;
@@ -65,5 +66,12 @@ export const pages: Page[] = [
     component: <Reto1 />,
     pageImage: "https://i.imgur.com/GtD68cD.png",
     cardTitle: "Reto 1 - Paint",
+  },
+  {
+    route: "/camera",
+    menuLabel: "Camera exercise",
+    component: <Camera />,
+    pageImage: "https://i.imgur.com/BhvYrLK.png",
+    cardTitle: "Camera exercise",
   },
 ];
