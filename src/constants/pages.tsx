@@ -8,6 +8,7 @@ import RtfGui from "../pages/ReactThreeGui";
 import SwitchModels from "../pages/SwitchModel";
 import Reto1 from "../pages/Reto1";
 import Camera from "../pages/Camera";
+import OrbitCamera from "../pages/OrbitCamera";
 
 export type Page = {
   route: string;
@@ -73,5 +74,12 @@ export const pages: Page[] = [
     component: <Camera />,
     pageImage: "https://i.imgur.com/BhvYrLK.png",
     cardTitle: "Camera exercise",
+  },
+  {
+    route: "/orbit-camera",
+    menuLabel: "HW Orbit Camera",
+    component: <OrbitCamera />,
+    pageImage: "https://i.imgur.com/il2wrTi.png",
+    cardTitle: "HW Orbit Camera",
   },
 ];
