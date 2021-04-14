@@ -9,6 +9,7 @@ import SwitchModels from "../pages/SwitchModel";
 import Reto1 from "../pages/Reto1";
 import Camera from "../pages/Camera";
 import OrbitCamera from "../pages/OrbitCamera";
+import MultiViewports from "../pages/MultiViewports";
 
 export type Page = {
   route: string;
@@ -81,5 +82,12 @@ export const pages: Page[] = [
     component: <OrbitCamera />,
     pageImage: "https://i.imgur.com/il2wrTi.png",
     cardTitle: "HW Orbit Camera",
+  },
+  {
+    route: "/multiviewports",
+    menuLabel: "HW multi viewports",
+    component: <MultiViewports />,
+    pageImage: "https://i.imgur.com/il2wrTi.png",
+    cardTitle: "HW multi viewports",
   },
 ];
