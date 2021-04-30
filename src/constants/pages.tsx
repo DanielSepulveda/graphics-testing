@@ -10,6 +10,7 @@ import Reto1 from "../pages/Reto1";
 import Camera from "../pages/Camera";
 import OrbitCamera from "../pages/OrbitCamera";
 import MultiViewports from "../pages/MultiViewports";
+import MaterialLight from "../pages/MaterialLight";
 
 export type Page = {
   route: string;
@@ -89,5 +90,12 @@ export const pages: Page[] = [
     component: <MultiViewports />,
     pageImage: "https://i.imgur.com/il2wrTi.png",
     cardTitle: "HW multi viewports",
+  },
+  {
+    route: "/materiallight",
+    menuLabel: "HW material light",
+    component: <MaterialLight />,
+    pageImage: "https://i.imgur.com/xZJ7iuX.png",
+    cardTitle: "HW material light",
   },
 ];
