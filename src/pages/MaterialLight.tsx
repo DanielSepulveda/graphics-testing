@@ -40,17 +40,24 @@ const cameraConfig = {
   far: 10_000,
 };
 
+// const camera = new THREE.PerspectiveCamera(
+//   cameraConfig.fov,
+//   cameraConfig.aspect,
+//   cameraConfig.near,
+//   cameraConfig.far
+// );
+// camera.position.set(2, 2, 5);
 const camera = new THREE.PerspectiveCamera(
-  cameraConfig.fov,
-  cameraConfig.aspect,
-  cameraConfig.near,
-  cameraConfig.far
+  70,
+  window.innerWidth / window.innerHeight,
+  10,
+  100
 );
-camera.position.set(2, 2, 5);
+camera.position.z = 35;
 const cameraControls = new OrbitControls(camera, renderer.domElement);
 
-const geometry = new THREE.BoxGeometry(1);
-// const geometry = new THREE.TorusKnotGeometry(10, 3, 200, 32).toNonIndexed();
+// const geometry = new THREE.BoxGeometry(1);
+const geometry = new THREE.TorusKnotGeometry(10, 3, 200, 32).toNonIndexed();
 const material = new THREE.MeshPhysicalMaterial({ color: 0x049ef4 });
 const box = new THREE.Mesh(geometry, material);
 box.position.set(0, 0.5, 0);
@@ -79,8 +86,25 @@ scene.add(floor);
 scene.add(pointLight);
 scene.add(pointLightHelper);
 
+const ambientLight = new THREE.AmbientLight(0x000000);
+scene.add(ambientLight);
+
+const light1 = new THREE.PointLight(0xffffff, 1, 0);
+light1.position.set(0, 200, 0);
+scene.add(light1);
+
+const light2 = new THREE.PointLight(0xffffff, 1, 0);
+light2.position.set(100, 200, 100);
+scene.add(light2);
+
+const light3 = new THREE.PointLight(0xffffff, 1, 0);
+light3.position.set(-100, -200, -100);
+scene.add(light3);
+
 const renderLoop = () => {
   renderer.render(scene, camera);
+  box.rotation.x += 0.005;
+  box.rotation.y += 0.005;
   updateScene();
   requestAnimationFrame(renderLoop);
 };
