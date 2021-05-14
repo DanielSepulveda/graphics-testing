@@ -1,5 +1,5 @@
 import React from "react";
-import { Canvas as RtfCanvas } from "react-three-fiber";
+import { Canvas as RtfCanvas } from "@react-three/fiber";
 import * as Three from "three";
 import { Box, chakra } from "@chakra-ui/react";
 import { Sphere, OrbitControls, Stats as DStats } from "@react-three/drei";
