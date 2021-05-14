@@ -33,12 +33,12 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 // renderer.setClearColor(new THREE.Color(0.2, 0.2, 0.35));
 
-const cameraConfig = {
-  fov: 60,
-  aspect: window.innerWidth / window.innerHeight,
-  near: 0.1,
-  far: 10_000,
-};
+// const cameraConfig = {
+//   fov: 60,
+//   aspect: window.innerWidth / window.innerHeight,
+//   near: 0.1,
+//   far: 10_000,
+// };
 
 // const camera = new THREE.PerspectiveCamera(
 //   cameraConfig.fov,

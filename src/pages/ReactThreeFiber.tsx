@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Canvas, MeshProps, useFrame } from "react-three-fiber";
+import { Canvas, MeshProps, useFrame } from "@react-three/fiber";
 import type { Mesh } from "three";
 import { Box } from "@chakra-ui/react";
 import { CanvasLayout } from "../components";

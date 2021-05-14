@@ -11,6 +11,7 @@ import Camera from "../pages/Camera";
 import OrbitCamera from "../pages/OrbitCamera";
 import MultiViewports from "../pages/MultiViewports";
 import MaterialLight from "../pages/MaterialLight";
+import ShaderDemo from "../pages/ShaderDemo";
 
 export type Page = {
   route: string;
@@ -97,5 +98,12 @@ export const pages: Page[] = [
     component: <MaterialLight />,
     pageImage: "https://i.imgur.com/xZJ7iuX.png",
     cardTitle: "HW material light",
+  },
+  {
+    route: "/shaderDemo",
+    menuLabel: "HW Shader demo",
+    component: <ShaderDemo />,
+    pageImage: "https://i.imgur.com/gqOOD5c.png",
+    cardTitle: "HW Shader demo",
   },
 ];
