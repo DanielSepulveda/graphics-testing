@@ -103,7 +103,7 @@ export const pages: Page[] = [
     route: "/shaderDemo",
     menuLabel: "HW Shader demo",
     component: <ShaderDemo />,
-    pageImage: "https://i.imgur.com/xZJ7iuX.png",
+    pageImage: "https://i.imgur.com/gqOOD5c.png",
     cardTitle: "HW Shader demo",
   },
 ];
